@@ -14,7 +14,7 @@ defaults: &defaults
 references:
   container_config: &container_config
     docker:
-      - image: docker:18.05.0-ce-git
+      - image: docker:18.06.0-ce-git
 
   dockerhub_login: &dockerhub_login
     run:
@@ -99,6 +99,10 @@ jobs:
                 docker tag horizon-core-web ${DOCKERHUB_PROJECT_USER}/${DOCKERHUB_PROJECT_NAME}:bleeding
                 docker push ${DOCKERHUB_PROJECT_USER}/${DOCKERHUB_PROJECT_NAME}:bleeding
                 ;;
+              bootstrap4)
+                docker tag horizon-core-web ${DOCKERHUB_PROJECT_USER}/${DOCKERHUB_PROJECT_NAME}:bootstrap4
+                docker push ${DOCKERHUB_PROJECT_USER}/${DOCKERHUB_PROJECT_NAME}:bootstrap4
+                ;;
               release*)
                 docker tag horizon-core-web ${DOCKERHUB_PROJECT_USER}/${DOCKERHUB_PROJECT_NAME}:latest
                 docker tag horizon-core-web ${DOCKERHUB_PROJECT_USER}/${DOCKERHUB_PROJECT_NAME}:${DOCKERHUB_TAG}
@@ -121,6 +125,7 @@ workflows:
               only:
                 - /release\/.*/
                 - master
+                - bootstrap4
           requires:
             - build_docker_image
 
@@ -133,6 +138,7 @@ workflows:
             branches:
               only:
                 - master
+                - bootstrap4
     jobs:
       - build_docker_image
       - publish_dockerhub:
@@ -140,5 +146,6 @@ workflows:
             branches:
               only:
                 - master
+                - bootstrap4
           requires:
             - build_docker_image
