@@ -15,7 +15,8 @@ RUN yum -y --setopt=tsflags=nodocs update && \
     curl https://yum.opennms.org/stable/rhel7/jicmp6/jicmp6-2.0.2-1.el7.centos.x86_64.rpm -o /tmp/jicmp6.rpm && \
     yum -y install /tmp/jicmp.rpm && \
     yum -y install /tmp/jicmp6.rpm && \
-    yum -y install gettext \
+    yum -y install vim \
+		   gettext \
                    iplike \
                    rrdtool \
                    jrrd2 \
