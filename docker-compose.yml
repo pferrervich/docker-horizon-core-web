@@ -16,6 +16,7 @@ services:
   database:
     container_name: opennms.psql
     image: postgres:10
+    restart: always
     env_file:
       - .postgres.env
     networks:
@@ -31,8 +32,9 @@ services:
       - "5432:5432"
 
   opennms:
-    container_name: opennms.hzn.core.web
+    container_name: opennms.web
     image: opennms/horizon-core-web:bleeding
+    restart: always
     init: true
     env_file:
       - .opennms.env
